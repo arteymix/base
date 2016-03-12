@@ -31,14 +31,12 @@ def home():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    print request.form
-    return "Hello world!"
     if request.method == 'POST':
         if g.db.session.query(User).filter(User.username == request.form['username'] and User.password == request._form['password']).exists():
             print "login"
         else:
             print "no login"
-    return "Hello world!"
+    return render_template('login.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
