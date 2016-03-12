@@ -1,4 +1,4 @@
-from flask import Flask, render_template, g
+from flask import Flask, render_template, g, request
 from quick_orm.core import Database
 from sqlalchemy import Column, String, Text
 
@@ -27,6 +27,17 @@ def setup_db():
 def home():
     user = User(username='test')
     g.db.session.add_then_commit(user)
+    return "Hello world!"
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    print request.form
+    return "Hello world!"
+    if request.method == 'POST':
+        if g.db.session.query(User).filter(User.username == request.form['username'] and User.password == request._form['password']).exists():
+            print "login"
+        else:
+            print "no login"
     return "Hello world!"
 
 if __name__ == '__main__':
