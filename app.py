@@ -27,7 +27,7 @@ def setup_db():
 def home():
     user = User(username='test')
     g.db.session.add_then_commit(user)
-    return "Hello world!"
+    return render_template("index.html")
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
